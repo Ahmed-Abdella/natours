@@ -6,6 +6,7 @@ const DB = process.env.DATABASE.replace(
   '<PASSWORD>',
   process.env.DATABASE_PASSWORD
 );
+const app = require('./app');
 
 mongoose
   .connect(DB, {
@@ -15,15 +16,46 @@ mongoose
     useFindAndModify: false,
   })
   .then((con) => {
-    console.log(con.connections);
     console.log('DB connection successful');
   })
   .catch((err) => {
     console.log(err);
   });
+
+const tourSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: [true, 'A tour must has a name'],
+    uniqe: true,
+  },
+  rating: {
+    type: Number,
+    default: 4.5,
+  },
+  price: {
+    type: Number,
+    required: [true, 'A tour must has a price'],
+  },
+});
+
+const Tour = mongoose.model('Tour', tourSchema);
+const testTour = new Tour({
+  name: 'the forest hiker',
+  rating: 4.7,
+  price: 500,
+});
+
+testTour
+  .save()
+  .then((doc) => {
+    console.log(doc);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
 const port = process.env.port;
 
-const app = require('./app');
 app.listen(port, () => {
   console.log(`App runnung in port ${port}`);
 });
