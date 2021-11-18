@@ -22,37 +22,20 @@ mongoose
     console.log(err);
   });
 
-const tourSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, 'A tour must has a name'],
-    uniqe: true,
-  },
-  rating: {
-    type: Number,
-    default: 4.5,
-  },
-  price: {
-    type: Number,
-    required: [true, 'A tour must has a price'],
-  },
-});
+// const testTour = new Tour({
+//   name: 'the forest hiker',
+//   rating: 4.7,
+//   price: 500,
+// });
 
-const Tour = mongoose.model('Tour', tourSchema);
-const testTour = new Tour({
-  name: 'the forest hiker',
-  rating: 4.7,
-  price: 500,
-});
-
-testTour
-  .save()
-  .then((doc) => {
-    console.log(doc);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+// testTour
+//   .save()
+//   .then((doc) => {
+//     console.log(doc);
+//   })
+//   .catch((err) => {
+//     console.log('ERRoRRRR:', err);
+//   });
 
 const port = process.env.port;
 
@@ -63,9 +46,9 @@ app.listen(port, () => {
 // =================================================================================================
 // =====================================================================================================
 
-const Person = function (firstName, job) {
-  this.firstName = firstName;
-  this.job = job;
-};
-const ahmed = new Person('Ahmed', 'developer');
-console.log(ahmed);
+// const Person = function (firstName, job) {
+//   this.firstName = firstName;
+//   this.job = job;
+// };
+// const ahmed = new Person('Ahmed', 'developer');
+// console.log(ahmed);
